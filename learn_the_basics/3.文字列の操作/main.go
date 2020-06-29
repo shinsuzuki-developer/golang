@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"unicode/utf8"
 )
 
 func main() {
@@ -60,8 +61,11 @@ func main() {
 	var datas = []string{"abc", "def", "ghi"}
 	fmt.Println(strings.Join(datas, "-")) // abc-def-ghi
 
-	// 文字列の長さ
-	fmt.Println(len(s)) // 11
+	// 文字列の長さ(len関数はバイト数)
+	ja := "GO言語"
+	fmt.Println(len(ja)) // 8
+	// 文字列の長さ(utf8.RuneCountInStringはユニコード文字数)
+	fmt.Println(utf8.RuneCountInString(ja)) // 4
 
 	// 文字列を数値へ変換
 	var ns = "123"
