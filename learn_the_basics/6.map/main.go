@@ -1,26 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 
-	// 宣言と定義
-	var m1 = map[string]int{
+	// mapの宣言と定義
+	var map1 = map[string]int{
 		"apple":  100,
 		"orange": 200,
 		"banana": 300,
 	}
 
-	fmt.Println(m1) // map[apple:100 banana:300 orange:200]
+	fmt.Println(map1) // map[apple:100 banana:300 orange:200]
 
-	// 宣言､追加
-	var m2 = map[string]int{}
-	m2["add-item-1"] = 100
-	m2["add-item-2"] = 200
-	fmt.Println(m2) // map[add-item-1:100 add-item-2:200]
+	// mapを宣言､値を追加
+	var map2 = map[string]int{}
+	map2["add-item-1"] = 100
+	map2["add-item-2"] = 200
+	fmt.Println(map2) // map[add-item-1:100 add-item-2:200]
 
-	// 参照
-	for key, value := range m2 {
+	// rangeによりmapを参照
+	for key, value := range map2 {
 		fmt.Println(key, value)
 	}
 	/*
@@ -28,21 +31,54 @@ func main() {
 		add-item-2 200
 	*/
 
-	// キーの存在確認
+	// mapのキーの存在確認
 	{
-		var val, isEexist = m2["add-item-1"]
+		var val, isEexist = map2["add-item-1"]
 		fmt.Println(val, isEexist) // 100 true
 	}
 
 	{
-		var val, isEexist = m2["nothing"]
+		var val, isEexist = map2["nothing"]
 		fmt.Println(val, isEexist) // 0 false
 	}
 
-	// makeにより初期化
-	var m3 = make(map[string]int)
-	m3["add-item-1"] = 100
-	m3["add-item-2"] = 200
-	fmt.Println(m3) // map[add-item-1:100 add-item-2:200]
+	// makeにより初期化(キャパシティは省略可能)
+	var map3 = make(map[string]int, 10)
+	map3["add-item-1"] = 100
+	map3["add-item-2"] = 200
+	fmt.Println(map3) // map[add-item-1:100 add-item-2:200]
 
+	// mapの長さ
+	fmt.Println(len(map3)) // 2
+
+	// mapから要素を削除
+	delete(map3, "add-item-1")
+	fmt.Println(len(map3)) // 1
+
+	// リテラルによるmapの初期化
+	var capitals = map[string]string{
+		"japan": "tokyo",
+		"usa":   "dc",
+		"china": "beijing",
+	}
+
+	key := make([]string, len(capitals), len(capitals))
+
+	count := 0
+	for k := range capitals { // keyによるソート
+		key[count] = k
+		count++
+	}
+
+	sort.Strings(key)
+
+	for i := 0; i < len(key); i++ {
+
+		fmt.Println(key[i], capitals[key[i]])
+	}
+	/*
+		china beijing
+		japan tokyo
+		usa dc
+	*/
 }
