@@ -26,6 +26,32 @@ func calcNum3(x int, y int) (r1 int, r2 int) {
 	return
 }
 
+// 可変長パラメータ(スライスとして受け取る)
+func calcNum4(x int, days ...int) {
+	fmt.Println(x)
+
+	for _, day := range days {
+		fmt.Println(day)
+	}
+}
+
+// 戻り値に名前をつける
+func calcNum5(x int, y int) (p1 int, p2 int) {
+	p1 = x * 2
+	p2 = y * 3
+	return
+}
+
+// クロージャー
+func countNumber(baseCcount int) func(addCount int) int {
+	var totalCount = baseCcount
+
+	return func(addCount int) int {
+		totalCount += addCount
+		return totalCount
+	}
+}
+
 func main() {
 	// 引数あり､戻り値なし
 	outputNum(100) // 100
@@ -53,4 +79,31 @@ func main() {
 	func(str string) {
 		fmt.Println("inner fuc:" + str)
 	}("exceute") // inner fuc:execute
+
+	// 可変長パラメータ
+	calcNum4(100, 1, 2, 3)
+	/*
+		100
+		1
+		2
+		3
+	*/
+
+	// 戻り値に名前をつける
+	p1, p2 := calcNum5(1, 2)
+	fmt.Println(p1)
+	fmt.Println(p2)
+
+	// クロージャー1
+	var p3 = 999
+	func() {
+		// 関数リテラルの外部の変数にアクセス
+		fmt.Println(p3)
+	}()
+
+	// クロージャー2
+	var count = countNumber(100)
+	fmt.Println(count(10))
+	fmt.Println(count(10))
+
 }
