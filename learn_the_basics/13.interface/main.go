@@ -30,6 +30,6 @@ func main() {
 	hero := Hero{"mario"}
 	enemy := Enemy{"kuppa"}
 
-	fmt.Println(Hello(hero))
-	fmt.Println(Hello(enemy))
+	fmt.Println(Hello(hero))  // my nam is mario(hero)
+	fmt.Println(Hello(enemy)) // my nam is kuppa(enemy)
 }
