@@ -40,3 +40,16 @@ func main() {
 	// 非同期処理の終了を待つ
 	wg.Wait()
 }
+
+/*
+	type-b
+	type-a
+	type-a
+	type-b
+	type-b
+	type-a
+	type-a
+	type-b
+	type-a
+	type-b
+*/
