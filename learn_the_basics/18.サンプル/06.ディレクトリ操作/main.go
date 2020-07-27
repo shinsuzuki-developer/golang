@@ -40,5 +40,4 @@ func main() {
 		path, _ := filepath.Abs(file.Name())
 		fmt.Println(path)
 	}
-
 }
